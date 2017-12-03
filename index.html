@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CME Project</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Raleway:400,600,700|Ubuntu:400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="./css/styles.css">
+
+</head>
+<body>
+
+  <!--   header -->
+  <!-- <header class="site-header py-5 mb-4">
+    <div class="container">
+      <h1 onclick="goHome()">speak out</h1>
+      <p class="lead">abuse victims: you are not alone</p>
+    </div>
+  </header> -->
+
+  <auth></auth>
+  <home></home>
+  <!-- <forums></forums> -->
+<!-- <new-post></new-post>   -->
+
+  <script src="https://use.fontawesome.com/3e2cf784ed.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDha0DgULM8rVHNznwExoSZ0NJ68Q7UVUs",
+      authDomain: "cme-project1.firebaseapp.com",
+      databaseURL: "https://cme-project1.firebaseio.com",
+      projectId: "cme-project1",
+      storageBucket: "cme-project1.appspot.com",
+      messagingSenderId: "192592040872"
+    };
+    firebase.initializeApp(config);
+  </script>
+
+  <script src="tags/auth.tag" type="riot/tag"></script>
+  <script src="tags/home.tag" type="riot/tag"></script>
+  <script src="tags/forums.tag" type="riot/tag"></script>
+  <script src="tags/post.tag" type="riot/tag"></script>
+  <script src="tags/preview.tag" type="riot/tag"></script>
+  <script src="tags/physical.tag" type="riot/tag"></script>
+  <script src="tags/sexual.tag" type="riot/tag"></script>
+  <script src="tags/emotional.tag" type="riot/tag"></script>
+  <script src="tags/others.tag" type="riot/tag"></script>
+  <script src="tags/new-post.tag" type="riot/tag"></script>
+  <script src="tags/physical-posts.tag" type="riot/tag"></script>
+  <script src="tags/physical-post-full.tag" type="riot/tag"></script>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/riot@3.7/riot+compiler.min.js"></script>
+
+  <script>
+      riot.mount('*');
+  </script>
+
+  <style>
+  h1 {
+    font-family: "Raleway", sans-serif;
+    font-weight: 700;
+    color: #2B4251;
+  }
+  .site-header h1 {
+    font-size: 3.5rem;
+  }
+  .lead {
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    color: #5B7D87;
+  }
+
+  header {
+    border-bottom: solid 2px #91B3BC;
+    padding-bottom: 40px;
+  }
+  h2, h3 {
+    font-family: "Open Sans", sans-serif;
+  }
+
+  </style>
+
+<!--
+COLORS:
+cream: #E9DCCD
+petal pink: #E3BAB3
+burgundy: #613A43
+fresh green: #849974
+charcoal: #36384C
+ -->
+
+<!-- COLORS:
+dew: #91B3BC
+rain: #5B7D87
+currant: #45415E
+slate: 2B4251
+creosote: #2E323C -->
+
+
+</body>
+</html>
