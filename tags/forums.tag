@@ -2,57 +2,49 @@
     <div class="forum-content-box row">
       <div class="col-md-8 offset-md-2">
         <div class="forumsHeader">
-            <div class="fixedButton" show={ !newPost }>
-                <button type="button" onclick={ makeNewPost }>
-                    <span>
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                    </span>
-                </button>
-            </div>
-            <h1>Forums<span show={ newPost }>
-                    - New Post</span>
+            <button show={!newPost} class="fixedButton" type="button" onclick={ makeNewPost }>
+              <span>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+              </span>
+            </button>
+            <h1>Forums
+              <span show={ newPost }> - New Post</span>
+              <span show={ showPhys }> - Physical Abuse</span>
+              <span show={ showSex }> - Sexual Abuse</span>
+              <span show={ showEmo }> - Emotional Abuse</span>
+              <span show={ showOthers }> - Others</span>
+
             </h1>
-            <p>subtitle here Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Please be respectful throughout these forums, and feel free to share your experiences anonymously. Any hate speech will be deleted.</p>
+            <br>
         </div>
         <div show={ showTable } class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <h2 class="forum-titles" onclick={ physFunc }>Physical Abuse</h2>
-                    <!-- <div class="previews">
-                        <strong>Title</strong>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                    </div>
-                    <div class="previews">
-                        <strong>Title</strong>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                    </div>
-                    <div class="previews">
-                        <strong>Title</strong>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-                    </div> -->
+                    <h2 class="forum-titles" onclick={ chooseCat }>Physical Abuse</h2>
                 </div>
                 <div class="col">
-                    <h2 class="forum-titles" onclick={ sexFunc }>Sexual Abuse</h2>
+                    <h2 class="forum-titles" onclick={ chooseCat }>Sexual Abuse</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h2 class="forum-titles" onclick={ emoFunc }>Emotional Abuse</h2>
+                    <h2 class="forum-titles" ref="emo" onclick={ chooseCat }>Emotional Abuse</h2>
                 </div>
                 <div class="col">
-                    <h2 class="forum-titles" onclick={ othersFunc }>Others / Miscellaneous</h2>
+                    <h2 class="forum-titles" onclick={ chooseCat }>Others / Miscellaneous</h2>
                 </div>
             </div>
         </div>
 
 
-        <physical-posts if={ showPhys } each={ physicalList }></physical-posts>
-        <physical-post-full if={ fullPost } post={ postToShow }></physical-post-full>
+        <physical-posts if={ showPhys } each={ chosenCategory }></physical-posts>
 
-        <!-- <sexual if={ showSex }></sexual>
-        <emotional if={ showEmo }></emotional>
-        <others if={ showOthers }></others> -->
+        <sexual-posts if={ showSex } each={chosenCategory}></sexual-posts>
+        <emotional-posts if={ showEmo } each={chosenCategory}></emotional-posts>
+        <other-posts if={ showOthers } each={chosenCategory}></other-posts>
 
+        <full-post if={fullPost} post={postToShow}></full-post>
         <new-post if={ newPost }></new-post>
 
       </div>
@@ -61,7 +53,6 @@
     <script>
 
         var that = this;
-        that.postToShow = {};
 
         this.on('mount', function() {
           that.showTable = true;
@@ -73,63 +64,88 @@
           that.fullPost = false;
         })
 
-        that.showFullPost = function(e) {
-          // that.postPreviews = false;
+        that.closePreviews = function(){
           that.showPhys = false;
-          that.postToShow.text = e.item.postText;
-          that.postToShow.title = e.item.postTitle;
-          that.postToShow.date = e.item.date;
-          that.postToShow.time = e.item.time;
-          that.postToShow.author = e.item.author;
-          that.postToShow.anonymous = e.item.anonymous;
+          that.showSex = false;
+          that.showEmo = false;
+          that.showOthers = false;
+        }
+
+        // that.postToShow = {};
+        that.postToShow;
+
+        that.showFullPost = function(e) {
+          that.closePreviews();
+          that.postToShow = e.item;
           that.fullPost = true;
-
-          // that.postToShow = e.currentTarget;
           that.update();
-          // console.log(e.item);
         }
 
-
-        // show tags functions
-        that.physFunc = function () {
-            that.showTable = false;
-            that.showPhys = true;
-        }
-        that.sexFunc = function () {
-            that.showTable = false;
-            that.showSex = true;
-        }
-        that.emoFunc = function () {
-            that.showTable = false;
-            that.showEmo = true;
-        }
-        that.othersFunc = function () {
-            that.showTable = false;
-            that.showOthers = true;
-        }
         that.makeNewPost = function () {
             that.showTable = false;
             that.newPost = true;
-            that.showPhys = false;
+            that.closePreviews();
             that.fullPost = false;
         }
 
-        // this.user = firebase.auth().currentUser;
-        var database = firebase.database()
-        var physListRef = database.ref('publicList/Physical');
+        var database = firebase.database();
 
-        this.physicalList = [];
+        that.chosenCategory = [];
 
-        // var lanternListRef = database.ref('userList'); get lanternList data from Firebase
-        physListRef.on('value', function (snapshot) {
-            var data = snapshot.val();
-            var physArray = [];
-            for (var key in data) {
-                physArray.push(data[key]);
-            }
-            that.physicalList = physArray;
+        that.chooseCat = function(e) {
+          if (e.currentTarget.innerText === "Physical Abuse") {
+            var refname = database.ref('publicList/Physical');
+            that.getPrevData(refname);
+            that.showPhys = true;
             that.update();
-        });
+          };
+          if (e.currentTarget.innerText === "Sexual Abuse") {
+            var refname = database.ref('publicList/Sexual');
+            that.getPrevData(refname);
+            that.showSex = true;
+            that.update();
+          };
+          if (e.currentTarget.innerText === "Emotional Abuse") {
+            var refname = database.ref('publicList/Emotional');
+            that.getPrevData(refname);
+            that.showEmo = true;
+            that.update();
+          };
+          if (e.currentTarget.innerText === "Others / Miscellaneous") {
+            var refname = database.ref('publicList/Other');
+            that.getPrevData(refname);
+            that.showOthers = true;
+            that.update();
+          };
+        }
+
+        that.getPrevData = function(ref) {
+          ref.once('value').then(function(snapshot) {
+            var data = snapshot.val();
+            var array = [];
+            for (var key in data) {
+              array.push(data[key]);
+          }
+            that.chosenCategory = array;
+            that.showTable = false;
+            that.update();
+          })
+        }
+
+        var postToDelete;
+
+        that.deleteFromFB = function() {
+          var privateRef = database.ref(`privateList/${that.postToShow.userID}/${that.postToShow.postID}`);
+          var publicRef = database.ref(`publicList/${that.postToShow.category}/${that.postToShow.postID}`);
+          privateRef.remove();
+          publicRef.remove();
+          that.closePreviews();
+          that.showTable = true;
+          that.fullPost = false;
+          that.update();
+        }
+
+
     </script>
 
     <style>
@@ -148,6 +164,7 @@
         .forumsHeader {
             border-bottom: solid 2px #91B3BC;
             padding: 0px;
+            position: relative;
         }
         .forumsHeader h1 {
             font-weight: 600;
@@ -176,14 +193,12 @@
             color: #000000;
             margin: 6px 6px 5px 5px;
         }
-        button {
-            border: 1.5px solid #91B3BC;
-            border-radius: 100%;
-        }
         .fixedButton {
             position: absolute;
-            right: 10%;
-            top: 36%;
+            right: 0%;
+            top: 0%;
+            border: 1.8px solid #91B3BC;
+            border-radius: 100%;
         }
 
     </style>

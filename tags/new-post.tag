@@ -70,7 +70,7 @@
     var newPrivatePost = {};
     newPrivatePost.postTitle = that.refs.postTitle.value;
     newPrivatePost.postText = that.refs.postText.value;
-    if (this.refs.anonymous) {
+    if (this.refs.anonymous.checked) {
       newPrivatePost.anonymous = true;
     } else {
       newPrivatePost.anonymous = false;
@@ -99,6 +99,8 @@
     newPublicPost.userID = this.user.uid;
     newPublicPost.date = that.date();
     newPublicPost.time = that.time();
+    newPublicPost.category = categoryValue;
+    newPublicPost.postID = newKey;
     // MISSING REPLIES
 
     var publicListRef = database.ref('publicList/' + categoryValue);
@@ -106,7 +108,6 @@
 
     that.parent.showTable = true;
     that.parent.newPost = false;
-    // this should be changed to redirect to the post site
     that.update();
 
   }

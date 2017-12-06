@@ -7,28 +7,34 @@
         </div>
     </header>
 
-    <div if={ showHomeTable } class="container-fluid main-content">
-        <div class="row">
-            <div class="col homeColumn">
-                <p>Info + Stats</p>
-            </div>
-            <div class="col homeColumn" onClick={ showForumPage } style="margin: 0px -2px 0px -2px;">
-                <!-- HERE!! -->
-                <span>Forums / Community</span>
-            </div>
-            <div class="col homeColumn">
-                Get Help
-            </div>
-        </div>
+    <div if={!userprofile}>
+      <div if={ showHomeTable } class="container-fluid main-content">
+          <div class="row">
+              <div class="col homeColumn">
+                  <p class="cl">Info + Stats</p>
+              </div>
+              <div class="col homeColumn" onClick={ showForumPage } style="margin: 0px -2px 0px -2px;">
+                  <!-- HERE!! -->
+                  <p class="cl">Forums / Community</p>
+              </div>
+              <div class="col homeColumn">
+                  <p class="cl">Get Help</p>
+              </div>
+          </div>
+      </div>
+
+      <forums if={ showForums }></forums>
     </div>
 
-    <forums if={ showForums }></forums>
+    <user-profile if={userprofile}></user-profile>
+
 
     <script>
         var that = this;
         that.showHomeTable = true;
         that.showForums = false;
         this.user = firebase.auth().currentUser;
+        that.userprofile = false;
 
         that.goHome = function() {
           that.showHomeTable = true;
@@ -39,6 +45,10 @@
             that.showForums = true;
             that.showHomeTable = false;
             that.update();
+        }
+        that.goToProf = function() {
+          that.userprofile = true;
+          that.update();
         }
     </script>
 
