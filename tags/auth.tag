@@ -50,9 +50,6 @@
           that.root.nextElementSibling._tag.goToProf();
         }
 
-
-
-
     </script>
 
     <style>

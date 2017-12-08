@@ -1,27 +1,23 @@
 <home>
 
-    <header class="site-header py-5 mb-4">
-        <div onclick={ goHome } class="container">
-            <h1>speak out</h1>
-            <p class="lead">abuse victims: you are not alone</p>
+    <header>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-5" onclick={ goHome }>
+              <h1>speak out</h1>
+              <p class="lead">abuse victims: you are not alone</p>
+            </div>
+            <div class="col-7">
+              <button class="navbtns" onclick={showForumPage}>Go To Forums</button>
+              <button class="navbtns"><a href="http://www.mujer.gob.do/index.php/servicios" target="_blank">Get Help</a></button>
+            </div>
+          </div>
         </div>
     </header>
 
-    <div if={!userprofile}>
-      <div if={ showHomeTable } class="container-fluid main-content">
-          <div class="row">
-              <div class="col homeColumn">
-                  <p class="cl">Info + Stats</p>
-              </div>
-              <div class="col homeColumn" onClick={ showForumPage } style="margin: 0px -2px 0px -2px;">
-                  <!-- HERE!! -->
-                  <p class="cl">Forums / Community</p>
-              </div>
-              <div class="col homeColumn">
-                  <p class="cl">Get Help</p>
-              </div>
-          </div>
-      </div>
+    <div if={showHomeTable} class="infographic">
+      <img src="infographic.png" alt="Infographic">
+    </div>
 
       <forums if={ showForums }></forums>
     </div>
@@ -39,30 +35,49 @@
         that.goHome = function() {
           that.showHomeTable = true;
           that.showForums = false;
+          that.userprofile = false;
+          that.update();
         }
 
         that.showForumPage = function () {
             that.showForums = true;
             that.showHomeTable = false;
+            that.userprofile = false;
             that.update();
         }
         that.goToProf = function() {
           that.userprofile = true;
+          that.showHomeTable = false;
+          that.showForums = false;
           that.update();
         }
     </script>
 
     <style>
-        .homeColumn {
-            border: black solid 2px;
-            margin: 0;
-            height: 300px;
-            background-color: #91B3BC;
-            color: #2E323C;
-            font-family: "Raleway", sans-serif;
-            font-weight: 600;
-            font-size: 25px;
-            text-align: center;
+        header {
+          padding: 50px 0px 40px 110px;
+          align-items: right;
+        }
+        a {
+          color: white;
+        }
+        .infographic {
+          background-color: #91B3BC;
+          position: absolute;
+          width: 100%;
+          height: 1100px;
+        }
+        .infographic img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .navbtns {
+          background-color: #5B7D87;
+          color: white;
+          padding: 8px;
+          margin: 0px;
+          font-size: 19px;
         }
 
     </style>

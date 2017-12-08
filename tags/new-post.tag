@@ -45,12 +45,14 @@
     }
 
 // get the time
-    that.time = function() {
+  that.time = function() {
       var d = new Date();
       var hours = d.getHours();
       var ampm;
       if (hours > 12) {
         hours = hours - 12;
+        ampm = "PM";
+      } else if (hours == 12) {
         ampm = "PM";
       } else {
         ampm = "AM"
@@ -58,9 +60,22 @@
       return `${hours}:${d.getMinutes()} ${ampm}`;
     }
 
+  that.checkForText = function() {
+    if (that.refs.postText.value == "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 // make post and send to firebase
   that.createNewPost = function() {
     // current user
+    if (that.checkForText()) {
+      alert("Post text cannot be empty.");
+      return;
+    }
+    // that.checkForText();
     this.user = firebase.auth().currentUser;
 
     var categoryEl = document.querySelector('[name="category"]:checked');

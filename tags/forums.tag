@@ -13,7 +13,6 @@
               <span show={ showSex }> - Sexual Abuse</span>
               <span show={ showEmo }> - Emotional Abuse</span>
               <span show={ showOthers }> - Others</span>
-
             </h1>
             <p>Please be respectful throughout these forums, and feel free to share your experiences anonymously. Any hate speech will be deleted.</p>
             <br>
@@ -39,7 +38,6 @@
 
 
         <physical-posts if={ showPhys } each={ chosenCategory }></physical-posts>
-
         <sexual-posts if={ showSex } each={chosenCategory}></sexual-posts>
         <emotional-posts if={ showEmo } each={chosenCategory}></emotional-posts>
         <other-posts if={ showOthers } each={chosenCategory}></other-posts>
@@ -71,9 +69,7 @@
           that.showOthers = false;
         }
 
-        // that.postToShow = {};
         that.postToShow;
-
         that.showFullPost = function(e) {
           that.closePreviews();
           that.postToShow = e.item;
@@ -91,7 +87,6 @@
         var database = firebase.database();
 
         that.chosenCategory = [];
-
         that.chooseCat = function(e) {
           if (e.currentTarget.innerText === "Physical Abuse") {
             var refname = database.ref('publicList/Physical');
@@ -133,7 +128,6 @@
         }
 
         var postToDelete;
-
         that.deleteFromFB = function() {
           var privateRef = database.ref(`privateList/${that.postToShow.userID}/${that.postToShow.postID}`);
           var publicRef = database.ref(`publicList/${that.postToShow.category}/${that.postToShow.postID}`);
@@ -145,17 +139,12 @@
           that.update();
         }
 
-
     </script>
 
     <style>
-
         .container-fluid {
             padding: 10px;
         }
-        /*.forum-content-box {
-            margin: 0px 200px 0px 200px;
-        }*/
         .col {
             border: 0.1px dotted black;
             padding-right: 0;
@@ -200,7 +189,5 @@
             border: 1.8px solid #91B3BC;
             border-radius: 100%;
         }
-
     </style>
-
 </forums>

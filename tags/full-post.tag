@@ -55,7 +55,38 @@
       }
     }
 
+    that.checkForReplyText = function() {
+        if (that.refs.replyText.value == "") {
+          return true;
+        } else {
+          return false;
+        }
+    }
+
+    // general function for getting replies from FB
+    that.replies = [];
+    that.getReplies = function(ref){
+            ref.on('value', function(snapshot) {
+              var data = snapshot.val();
+              var array = [];
+              for (var key in data) {
+                array.push(data[key]);
+              }
+              that.replies = array;
+              that.update();
+              console.log(that.replies);
+            })
+        }
+
+    // call to get replies as soon as tag is mounted
+    that.getReplies(that.repliesRef);
+
+    // makes a reply when "add reply" is clicked, calls getReplies in order to update the replies we see
     that.createReply = function() {
+      if (that.checkForReplyText()) {
+        alert("Reply text cannot be empty.")
+        return;
+      }
       var reply = {};
       reply.replyText = that.refs.replyText.value;
       reply.userID = that.user.uid;
@@ -66,6 +97,7 @@
           reply.anonymous = false;
         };
       var newKey = that.repliesRef.push().key;
+      reply.replyID = newKey;
 
       that.addReply(reply, that.repliesRef, newKey);
       that.getReplies(that.repliesRef);
@@ -73,27 +105,16 @@
       that.refs.replyText.value = "";
     }
 
+    // adds created reply to FB
     that.addReply = function(replyObj, ref, key) {
       ref.child(key).set(replyObj);
     }
 
-    that.replies = [];
-    that.getReplies = function(ref){
-        ref.on('value', function(snapshot) {
-          var data = snapshot.val();
-          var array = [];
-          for (var key in data) {
-            array.push(data[key]);
-          }
-          that.replies = array;
-        })
-        that.update();
-      console.log(that.replies);
+    that.deleteReplyFromFB = function(replyid) {
+      var replyRef = firebase.database().ref(`publicList/${that.opts.post.category}/${that.opts.post.postID}/replies/${replyid}`);
+      replyRef.remove();
+      that.getReplies(that.repliesRef);
     }
-
-    that.on('update', that.getReplies(that.repliesRef));
-
-
 
   </script>
 
