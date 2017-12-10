@@ -1,9 +1,9 @@
 <auth>
 
     <div class="buttons">
-        <button if={ !user } onClick={ logIn }>Log In</button>
-        <button if={ user } onclick={goToProfile}>My Profile</button>
-        <button if={ user } onClick={ logOut }>Log Out</button>
+        <button if={ !user } onClick={ logIn }>Iniciar Sesión</button>
+        <button if={ user } onclick={goToProfile}>Mi Perfil</button>
+        <button if={ user } onClick={ logOut }>Cerrar Sesión</button>
     </div>
 
     <script>

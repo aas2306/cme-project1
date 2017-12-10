@@ -7,31 +7,31 @@
                   <i class="fa fa-plus" aria-hidden="true"></i>
               </span>
             </button>
-            <h1>Forums
-              <span show={ newPost }> - New Post</span>
-              <span show={ showPhys }> - Physical Abuse</span>
-              <span show={ showSex }> - Sexual Abuse</span>
-              <span show={ showEmo }> - Emotional Abuse</span>
-              <span show={ showOthers }> - Others</span>
+            <h1>Foros
+              <span show={ newPost }> - Nueva Publicación</span>
+              <span show={ showPhys }> - Abuso Físico</span>
+              <span show={ showSex }> - Abuso Sexual</span>
+              <span show={ showEmo }> - Abuso Emocional</span>
+              <span show={ showOthers }> - Otros</span>
             </h1>
-            <p>Please be respectful throughout these forums, and feel free to share your experiences anonymously. Any hate speech will be deleted.</p>
+            <p>Por favor sea respetuoso a través de estos foros, y siéntase libre de compartir sus experiencias de forma anónima. Cualquier discurso de odio será eliminado.</p>
             <br>
         </div>
         <div show={ showTable } class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <h2 class="forum-titles" onclick={ chooseCat }>Physical Abuse</h2>
+                    <h2 class="forum-titles" onclick={ chooseCat }>Abuso Físico</h2>
                 </div>
                 <div class="col">
-                    <h2 class="forum-titles" onclick={ chooseCat }>Sexual Abuse</h2>
+                    <h2 class="forum-titles" onclick={ chooseCat }>Abuso Sexual</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <h2 class="forum-titles" ref="emo" onclick={ chooseCat }>Emotional Abuse</h2>
+                    <h2 class="forum-titles" ref="emo" onclick={ chooseCat }>Abuso Emocional</h2>
                 </div>
                 <div class="col">
-                    <h2 class="forum-titles" onclick={ chooseCat }>Others / Miscellaneous</h2>
+                    <h2 class="forum-titles" onclick={ chooseCat }>Otros / Misceláneo</h2>
                 </div>
             </div>
         </div>
@@ -88,25 +88,25 @@
 
         that.chosenCategory = [];
         that.chooseCat = function(e) {
-          if (e.currentTarget.innerText === "Physical Abuse") {
+          if (e.currentTarget.innerText === "Abuso Físico") {
             var refname = database.ref('publicList/Physical');
             that.getPrevData(refname);
             that.showPhys = true;
             that.update();
           };
-          if (e.currentTarget.innerText === "Sexual Abuse") {
+          if (e.currentTarget.innerText === "Abuso Sexual") {
             var refname = database.ref('publicList/Sexual');
             that.getPrevData(refname);
             that.showSex = true;
             that.update();
           };
-          if (e.currentTarget.innerText === "Emotional Abuse") {
+          if (e.currentTarget.innerText === "Abuso Emocional") {
             var refname = database.ref('publicList/Emotional');
             that.getPrevData(refname);
             that.showEmo = true;
             that.update();
           };
-          if (e.currentTarget.innerText === "Others / Miscellaneous") {
+          if (e.currentTarget.innerText === "Otros / Misceláneo") {
             var refname = database.ref('publicList/Other');
             that.getPrevData(refname);
             that.showOthers = true;

@@ -17,7 +17,7 @@ if (that.user.uid === that.userID) {
 
 that.authorName = function() {
   if (that.anonymous) {
-    return "Anonymous";
+    return "Anónimo";
   } else {
     return that.author;
   };

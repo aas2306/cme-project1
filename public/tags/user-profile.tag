@@ -4,12 +4,12 @@
     <img id="displayPic" src={user.photoURL} alt="User Display Photo">
     <h3>{user.displayName}</h3>
 
-    <p>My recent posts:</p>
+    <p>Mis publicaciones recientes:</p>
       <div class="post-prev" each={profilePostList}>
         <strong class="post-title cl">{postTitle}</strong>
         <p class="post-text">{checkTextLength(postText)}</p>
         <p class="datetime">{date} {time}</p>
-        <p class="category">Category: {category}</p>
+        <p class="category">Categoría: {category}</p>
       </div>
 
   </div>
@@ -52,7 +52,7 @@
 
 <style>
   .profile {
-    margin: 10px;
+    margin: 20px 80px 20px 80px;
   }
   #displayPic {
     display: inline;
@@ -60,7 +60,7 @@
     border-radius: 100%;
   }
   .post-prev {
-    margin: 10px;
+    /*margin: 10px;*/
     border: 1px solid black;
     padding: 15px;
   }

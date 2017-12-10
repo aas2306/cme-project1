@@ -5,23 +5,23 @@
         <strong class="post-title">{ opts.post.postTitle }</strong>
         <p class="author">{authorName()}</p>
         <p class="datetime">{opts.post.date} {opts.post.time}</p>
-        <p class="category">Category: {opts.post.category}</p>
+        <p class="category">Categoría: {opts.post.category}</p>
         <p class="post-text">{ opts.post.postText }</p>
       </div>
       <div if={ownedByUser}>
         <span class="deleteBtn" type="button" onclick={deletePost}><i class="fa fa-trash" aria-hidden="true"></i></span>
       </div>
       <div class="replies">
-        <p>Replies:</p>
+        <p>Comentarios:</p>
         <reply each={replies}></reply>
         <div class="form-group">
           <textarea class="replyTextArea" ref="replyText" placeholder="Your reply here..." rows="4" cols="50"></textarea>
           <label>
             <input class="form-control" type="checkbox" class="form-check-input" ref="anonymous">
-            Anonymous
+            Anónimo
           </label>
           <br>
-          <button onclick={createReply}>Add reply</button>
+          <button onclick={createReply}>Publicar Comentario</button>
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
 
     that.authorName = function() {
       if (that.opts.post.anonymous) {
-        return "Anonymous";
+        return "Anónimo";
       } else {
         return that.opts.post.author;
       };

@@ -5,11 +5,11 @@
           <div class="row">
             <div class="col-5" onclick={ goHome }>
               <h1>speak out</h1>
-              <p class="lead">abuse victims: you are not alone</p>
+              <p class="lead">víctimas de abuso: no estas sola</p>
             </div>
             <div class="col-7">
-              <button class="navbtns" onclick={showForumPage}>Go To Forums</button>
-              <button class="navbtns"><a href="http://www.mujer.gob.do/index.php/servicios" target="_blank">Get Help</a></button>
+              <button class="navbtns" onclick={showForumPage}>Ir a Foros</button>
+              <button class="navbtns"><a href="http://www.mujer.gob.do/index.php/servicios" target="_blank">Buscar Ayuda</a></button>
             </div>
           </div>
         </div>

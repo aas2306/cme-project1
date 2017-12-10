@@ -1,4 +1,4 @@
-<emotional-posts>
+<other-posts>
 
   <div class="post-prev" onclick={parent.showFullPost}>
     <strong class="post-title">{ postTitle }</strong>
@@ -13,7 +13,7 @@
 
     that.authorName = function() {
       if (that.anonymous) {
-        return "Anonymous";
+        return "Anónimo";
       } else {
         return that.author;
       };
@@ -52,4 +52,4 @@
 
   </style>
 
-</emotional-posts>
+</other-posts>

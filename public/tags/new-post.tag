@@ -12,24 +12,24 @@
     <div class="form-check">
       <label>
         <input class="form-control" type="checkbox" class="form-check-input" checked ref="anonymous">
-        Anonymous
+        Anónimo
       </label>
     </div>
     <div class="form-group">
       <label>
-        <input type="radio" name="category" value="Physical" checked> Physical
+        <input type="radio" name="category" value="Physical" checked> Físico
       </label>
       <label>
         <input type="radio" name="category" value="Sexual"> Sexual
       </label>
       <label>
-        <input type="radio" name="category" value="Emotional"> Emotional
+        <input type="radio" name="category" value="Emotional"> Emocional
       </label>
       <label>
-        <input type="radio" name="category" value="Other"> Other
+        <input type="radio" name="category" value="Other"> Otros
       </label>
     </div>
-    <button class="btn" onclick={ createNewPost }>Post</button>
+    <button class="btn" onclick={ createNewPost }>Publicar</button>
   </form>
 </div>
 
